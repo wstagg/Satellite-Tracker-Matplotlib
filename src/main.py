@@ -12,7 +12,7 @@ from Satellite import Satellite
 # Create the figure and axis
 plt.style.use('dark_background')
 fig = plt.figure(figsize=(24, 16))
-ax = fig.add_subplot(111, projection=ccrs.Robinson())
+ax = fig.add_subplot(111, projection=ccrs.PlateCarree())
 
 # Set up the map
 ax.set_global()
@@ -21,7 +21,7 @@ ax.stock_img()  # Blue marble-style background
 
 # Read the config file
 config = OrbitFetcher.Config()
-ok = config.read("config.txt")
+ok = config.read('config.txt')
 
 if ok:
     dataReceiver = OrbitFetcher.DataReceiver(config)
@@ -37,7 +37,7 @@ if ok:
     ax.plot(observer_lon, observer_lat, marker='*', color='orange', 
             markersize=8, transform=ccrs.PlateCarree())
     ax.text(observer_lon + 2, observer_lat + 1, "You are here", 
-            transform=ccrs.PlateCarree())
+            transform=ccrs.PlateCarree(), color=(0,0,0))
     
     # Track some random satellites that pass over
     satellites = dataReceiver.getSatellitesAbove()
@@ -90,7 +90,7 @@ if ok:
             plot = ax.plot(lon, lat, marker='D', color=sat.colour, 
                           markersize=6, transform=ccrs.PlateCarree())[0]
             text = ax.text(lon + 2, lat + 1, sat.name, 
-                          transform=ccrs.PlateCarree())
+                          transform=ccrs.PlateCarree(), color=(0,0,0))
             satPlotsToClear.append((plot, text)) 
         
         # Update day/night cycle
