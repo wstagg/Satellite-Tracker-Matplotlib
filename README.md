@@ -1,3 +1,9 @@
+## Python packages required
+- matplotlib
+- cartopy
+- scipy
+
+ ## How to use
 Requires OrbitFetcher with python bindings.
 
 Copy and the OrbitFetcher shared library into the src directory along with the config.txt (dont forget to have a valid API key).
