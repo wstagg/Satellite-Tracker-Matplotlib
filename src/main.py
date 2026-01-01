@@ -1,3 +1,14 @@
+import ssl
+import certifi
+import urllib.request
+
+# Create a proper SSL context using certifi's CA bundle
+ssl_context = ssl.create_default_context(cafile=certifi.where())
+# Configure urllib to use this context (Cartopy uses urllib internally)
+https_handler = urllib.request.HTTPSHandler(context=ssl_context)
+opener = urllib.request.build_opener(https_handler)
+urllib.request.install_opener(opener)
+
 import OrbitFetcher
 import matplotlib
 matplotlib.use('TkAgg')
@@ -21,7 +32,7 @@ ax.stock_img()  # Blue marble-style background
 
 # Read the config file
 config = OrbitFetcher.Config()
-config.read('config.txt')
+config.read('orbitFetcherConfig.txt')
 
 dataReceiver = OrbitFetcher.DataReceiver(config)
 satellitesToPlot = []
