@@ -2,6 +2,7 @@
 - matplotlib
 - cartopy
 - scipy
+- certifi
 
  ## How to use
 Requires OrbitFetcher with python bindings.
